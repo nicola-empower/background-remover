@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraRemover — Premium Image Background Eraser</title>
+  <meta name="description" content="A premium, client-side web tool to remove dark, light, or specific color backgrounds from your images with real-time preview and edge smoothing. Created by Nicola Berry.">
+  
+  <!-- Google Fonts for Luxury Editorial Styling -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <span class="logo-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+        <div class="brand-text">
+          <h1 id="app-title">AuraRemover</h1>
+          <span class="tagline">Elegant transparency keyer</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="https://nicolaberry.uk" target="_blank" rel="noopener" class="header-link">
+          <i class="fa-solid fa-globe"></i> Visit Nicola Berry
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+      <!-- Controls Panel (Left/Top) -->
+      <section class="control-panel glass-card" aria-label="Controls">
+        <h2 class="panel-title"><i class="fa-solid fa-sliders"></i> Adjustments</h2>
+        
+        <!-- Upload Trigger in Sidebar (Visible when image is loaded) -->
+        <div class="sidebar-upload-btn" id="sidebar-upload-container">
+          <button type="button" id="btn-change-image" class="secondary-btn">
+            <i class="fa-solid fa-upload"></i> Upload Different Image
+          </button>
+        </div>
+
+        <div class="control-group">
+          <label for="select-mode" class="control-label">Removal Mode</label>
+          <div class="select-wrapper">
+            <select id="select-mode">
+              <option value="dark" selected>Remove Dark Background</option>
+              <option value="light">Remove Light Background</option>
+              <option value="color">Remove Custom Color</option>
+            </select>
+            <i class="fa-solid fa-chevron-down select-icon"></i>
+          </div>
+          <p class="control-help" id="mode-help-text">Removes black and shadow areas under the specified brightness threshold.</p>
+        </div>
+
+        <!-- Custom Color Picker (Hidden by default unless 'color' mode selected) -->
+        <div class="control-group hidden" id="color-picker-group">
+          <label class="control-label">Target Color</label>
+          <div class="color-picker-row">
+            <div class="color-preview-box" id="color-preview-box">
+              <input type="color" id="input-color-picker" value="#000000" aria-label="Select custom color to remove">
+            </div>
+            <div class="color-inputs">
+              <input type="text" id="input-color-hex" value="#000000" placeholder="#000000" maxlength="7">
+              <button type="button" id="btn-eyedropper" class="icon-btn" title="Sample color from image">
+                <i class="fa-solid fa-eye-dropper"></i>
+              </button>
+            </div>
+          </div>
+          <p class="control-help">Select the exact color to turn transparent.</p>
+        </div>
+
+        <div class="control-group">
+          <div class="slider-label-row">
+            <label for="range-threshold" class="control-label">Threshold</label>
+            <span class="slider-value" id="val-threshold">30</span>
+          </div>
+          <input type="range" id="range-threshold" min="0" max="255" value="30">
+          <div class="slider-ticks">
+            <span>0 (Low)</span>
+            <span>255 (High)</span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="slider-label-row">
+            <label for="range-fuzziness" class="control-label">Edge Smoothness</label>
+            <span class="slider-value" id="val-fuzziness">10</span>
+          </div>
+          <input type="range" id="range-fuzziness" min="0" max="100" value="10">
+          <div class="slider-ticks">
+            <span>Sharp</span>
+            <span>Feathered</span>
+          </div>
+        </div>
+
+        <div class="action-footer">
+          <button type="button" id="btn-download" class="primary-btn" disabled>
+            <i class="fa-solid fa-download"></i> Download Transparent PNG
+          </button>
+        </div>
+      </section>
+
+      <!-- Preview Workspace (Right/Bottom) -->
+      <section class="preview-area" aria-label="Image Previews">
+        
+        <!-- Upload State (Dropzone) -->
+        <div class="upload-dropzone glass-card" id="dropzone">
+          <input type="file" id="input-file" accept="image/*" class="file-input-hidden">
+          <div class="dropzone-content">
+            <div class="dropzone-icon">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <h3>Drag & Drop Image Here</h3>
+            <p class="dropzone-sub">Supports PNG, JPEG, WEBP or Paste (Ctrl+V)</p>
+            <button type="button" class="btn-browse primary-btn">Browse Files</button>
+          </div>
+        </div>
+
+        <!-- Editor State (Hidden initially) -->
+        <div class="editor-workspace hidden" id="editor-workspace">
+          <!-- Before Card -->
+          <div class="preview-card glass-card">
+            <div class="card-header">
+              <span class="card-badge"><i class="fa-solid fa-image"></i> Original</span>
+              <span class="image-dimensions" id="orig-dimensions">0 x 0</span>
+            </div>
+            <div class="canvas-container">
+              <canvas id="canvas-original"></canvas>
+            </div>
+          </div>
+
+          <!-- After Card -->
+          <div class="preview-card glass-card">
+            <div class="card-header">
+              <span class="card-badge success"><i class="fa-solid fa-circle-nodes"></i> Transparent Output</span>
+              <span class="zoom-indicator" id="output-zoom"><i class="fa-solid fa-expand"></i> Auto Fit</span>
+            </div>
+            <div class="canvas-container checkered-bg">
+              <canvas id="canvas-processed"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <p class="copyright">© 2026 AuraRemover. All processing runs locally in your browser.</p>
+        <p class="attribution">
+          Created by <a href="https://nicolaberry.uk" target="_blank" rel="noopener" class="author-link">Nicola Berry</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
