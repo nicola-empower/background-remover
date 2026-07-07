@@ -5,12 +5,16 @@
 [![Client Side](https://img.shields.io/badge/Privacy-100%25%20Local-2E6A4F?logo=securityscorecard&logoColor=white)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-800020)](#)
 
+
+<img width="2814" height="1516" alt="image" src="https://github.com/user-attachments/assets/33d32af5-6f09-4219-8d5b-5020c2a2aa6b" />
+
+
 AuraRemover is a premium, high-fidelity background removal tool that converts dark backgrounds, light backgrounds, or custom keyed colours into transparent PNG alphas. It comes in two formats:
 1. **Interactive Web App**: A stunning, lightweight, 100% client-side web application styled with a luxury cream and burgundy glassmorphism layout, featuring real-time adjustment sliders and eye-dropper tools.
 2. **Python CLI Utility**: A command-line companion script using Pillow (`PIL`) for automated terminal workflows, scripts, and batch processing.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Features
@@ -31,7 +35,7 @@ AuraRemover is a premium, high-fidelity background removal tool that converts da
 * **Pillow Integration**: Uses lightweight, stable, standard image libraries to perform exact pixel manipulations.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Visual Identity
@@ -43,7 +47,7 @@ The web interface is custom-tailored with a premium **light-mode cream and burgu
 * **Editorial Fonts**: Headings utilize *Playfair Display* for a classic luxury press look, paired with *Plus Jakarta Sans* for clean, legible controls.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Getting Started
@@ -81,7 +85,7 @@ python remover.py -i input.png -o output.png -m dark -t 30 -f 10
 | `-c`, `--color` | Color Hex | *e.g. `#00FF00`* | `None` | Hex color code to target (required in `color` mode). |
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## File Structure
@@ -96,7 +100,7 @@ png-background-remover/
 ```
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## License
@@ -104,7 +108,7 @@ png-background-remover/
 This project is licensed under the MIT License. Feel free to use, copy, modify, distribute, or incorporate it into your personal and commercial ventures.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Credits
