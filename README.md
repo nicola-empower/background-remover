@@ -1,13 +1,14 @@
-# AuraRemover - Premium Image Background Eraser & Colour Keyer
+# AuraRemover & AuraUtils — Premium Image Background Eraser & Asset Toolkit
 
 [![HTML5 Canvas](https://img.shields.io/badge/HTML5-Canvas-E34F26?logo=html5&logoColor=white)](#)
 [![Pillow Python](https://img.shields.io/badge/Python-Pillow-3776AB?logo=python&logoColor=white)](#)
 [![Client Side](https://img.shields.io/badge/Privacy-100%25%20Local-2E6A4F?logo=securityscorecard&logoColor=white)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-800020)](#)
 
-AuraRemover is a premium, high-fidelity background removal tool that converts dark backgrounds, light backgrounds, or custom keyed colours into transparent PNG alphas. It comes in two formats:
-1. **Interactive Web App**: A stunning, lightweight, 100% client-side web application styled with a luxury cream and burgundy glassmorphism layout, featuring real-time adjustment sliders and eye-dropper tools.
-2. **Python CLI Utility**: A command-line companion script using Pillow (`PIL`) for automated terminal workflows, scripts, and batch processing.
+AuraRemover & AuraUtils is a premium suite of client-side web and command-line tools for image background removal, optimization, palette generation, icon building, and watermarking.
+
+1. **Interactive Web App**: A stunning, lightweight, 100% client-side web application styled with a luxury cream and burgundy glassmorphism layout, featuring real-time background removal, threshold sliders, and eye-dropper tools.
+2. **AuraUtils CLI Suite**: A collection of high-performance Python companion scripts using Pillow (`PIL`) for automated background removal, batch WebP compression, app icon building, color palette extraction, and image watermarking.
 
 <p align="center">
   <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
@@ -80,6 +81,47 @@ python remover.py -i input.png -o output.png -m dark -t 30 -f 10
 | `-f`, `--fuzziness` | Fuzziness | `0` to `100` | `10` | Linear feathering width on transition boundaries. |
 | `-c`, `--color` | Color Hex | *e.g. `#00FF00`* | `None` | Hex color code to target (required in `color` mode). |
 
+### 3. Running Other Python CLI Utilities (`AuraUtils`)
+
+#### A. WebP Batch Optimizer (`optimize.py`)
+Converts JPEGs and PNGs in bulk into modern, compressed WebP files. Maintains aspect ratios with optional resizing limits.
+```bash
+# Convert a single image
+python optimize.py -i input.png -q 85
+
+# Batch optimize an entire folder and resize images to 800px width limit
+python optimize.py -i ./images -w 800 -q 80 -o ./compressed
+```
+
+#### B. Dominant Color Palette Extractor (`palette.py`)
+Analyzes an image and extracts its top dominant colors. Supports outputting values as plain text, CSS variables, JSON, or an elegant HTML preview card page.
+```bash
+# Print hex codes with visual color blocks in the console
+python palette.py -i award_badge.png -n 5
+
+# Export color variables directly as CSS variables
+python palette.py -i award_badge.png -f css
+
+# Generate a gorgeous HTML preview dashboard of colors side-by-side with the image
+python palette.py -i award_badge.png -n 6 -f html
+```
+
+#### C. App Icon & Favicon Builder (`icon_builder.py`)
+Creates a complete suite of browser favicons, apple touch icons, and manifest assets from a single square source image, outputting ready-to-copy HTML boilerplates.
+```bash
+python icon_builder.py -i logo_large.png -o output_icons
+```
+
+#### D. Bulk Image Watermarker (`watermark.py`)
+Applies customizable text or logo-based overlays onto a single image or an entire folder of images with adjustable margins, corners, and opacity settings.
+```bash
+# Apply a text watermark in the bottom-right corner at 40% opacity
+python watermark.py -i photo.jpg -t "© 2026 Nicola Berry" -p bottom-right -a 0.4
+
+# Overlay a transparent logo badge in the center at 25% opacity
+python watermark.py -i ./gallery -l badge.png -p center -a 0.25
+```
+
 <p align="center">
   <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
 </p>
@@ -87,11 +129,15 @@ python remover.py -i input.png -o output.png -m dark -t 30 -f 10
 ## File Structure
 
 ```text
-png-background-remover/
+background-remover/
 ├── index.html        # Main HTML application layout
 ├── style.css         # Custom cream, burgundy, & glassmorphism stylesheets
 ├── app.js            # JavaScript canvas-processing engine & UI handler
-├── remover.py        # Python CLI Pillow script
+├── remover.py        # Background remover CLI script
+├── optimize.py       # WebP optimizer & image compressor CLI script
+├── palette.py        # Dominant color palette extractor CLI script
+├── icon_builder.py   # Favicon and App Icon builder CLI script
+├── watermark.py      # Text & Logo watermarking CLI script
 └── README.md         # Documentation & guide
 ```
 
