@@ -5,13 +5,17 @@
 [![Client Side](https://img.shields.io/badge/Privacy-100%25%20Local-2E6A4F?logo=securityscorecard&logoColor=white)](#)
 [![License: MIT](https://img.shields.io/badge/License-MIT-800020)](#)
 
-AuraRemover & AuraUtils is a premium suite of client-side web and command-line tools for image background removal, optimization, palette generation, icon building, and watermarking.
+AuraRemover & AuraUtils is a premium suite of client-side web and command-line tools for image background removal, optimisation, palette generation, icon building, and watermarking.
+> The Reality:
+  > Canva wants £12.99 per month and I was feeling stubborn.
+
+<img width="2814" height="1516" alt="image" src="https://github.com/user-attachments/assets/33d32af5-6f09-4219-8d5b-5020c2a2aa6b" />
 
 1. **Interactive Web App**: A stunning, lightweight, 100% client-side web application styled with a luxury cream and burgundy glassmorphism layout, featuring real-time background removal, threshold sliders, and eye-dropper tools.
 2. **AuraUtils CLI Suite**: A collection of high-performance Python companion scripts using Pillow (`PIL`) for automated background removal, batch WebP compression, app icon building, color palette extraction, and image watermarking.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Features
@@ -32,7 +36,7 @@ AuraRemover & AuraUtils is a premium suite of client-side web and command-line t
 * **Pillow Integration**: Uses lightweight, stable, standard image libraries to perform exact pixel manipulations.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Visual Identity
@@ -44,7 +48,7 @@ The web interface is custom-tailored with a premium **light-mode cream and burgu
 * **Editorial Fonts**: Headings utilize *Playfair Display* for a classic luxury press look, paired with *Plus Jakarta Sans* for clean, legible controls.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Getting Started
@@ -123,7 +127,7 @@ python watermark.py -i ./gallery -l badge.png -p center -a 0.25
 ```
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## File Structure
@@ -142,7 +146,7 @@ background-remover/
 ```
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## License
@@ -150,7 +154,7 @@ background-remover/
 This project is licensed under the MIT License. Feel free to use, copy, modify, distribute, or incorporate it into your personal and commercial ventures.
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=E91E63" />
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=6&color=800020" />
 </p>
 
 ## Credits
