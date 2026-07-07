@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AuraRemover — Premium Image Background Eraser</title>
-  <meta name="description" content="A premium, client-side web tool to remove dark, light, or specific color backgrounds from your images with real-time preview and edge smoothing. Created by Nicola Berry.">
-  
+  <title>AuraRemover - Premium Image Background Eraser</title>
+  <meta name="description"
+    content="A premium, client-side web tool to remove dark, light, or specific color backgrounds from your images with real-time preview and edge smoothing. Created by Nicola Berry.">
+
   <!-- Google Fonts for Luxury Editorial Styling -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- FontAwesome for Premium Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <div class="app-container">
@@ -40,7 +47,7 @@
       <!-- Controls Panel (Left/Top) -->
       <section class="control-panel glass-card" aria-label="Controls">
         <h2 class="panel-title"><i class="fa-solid fa-sliders"></i> Adjustments</h2>
-        
+
         <!-- Upload Trigger in Sidebar (Visible when image is loaded) -->
         <div class="sidebar-upload-btn" id="sidebar-upload-container">
           <button type="button" id="btn-change-image" class="secondary-btn">
@@ -58,7 +65,8 @@
             </select>
             <i class="fa-solid fa-chevron-down select-icon"></i>
           </div>
-          <p class="control-help" id="mode-help-text">Removes black and shadow areas under the specified brightness threshold.</p>
+          <p class="control-help" id="mode-help-text">Removes black and shadow areas under the specified brightness
+            threshold.</p>
         </div>
 
         <!-- Custom Color Picker (Hidden by default unless 'color' mode selected) -->
@@ -111,7 +119,7 @@
 
       <!-- Preview Workspace (Right/Bottom) -->
       <section class="preview-area" aria-label="Image Previews">
-        
+
         <!-- Upload State (Dropzone) -->
         <div class="upload-dropzone glass-card" id="dropzone">
           <input type="file" id="input-file" accept="image/*" class="file-input-hidden">
@@ -158,6 +166,273 @@
       <div class="footer-content">
         <p class="copyright">© 2026 AuraRemover. All processing runs locally in your browser.</p>
         <p class="attribution">
+          Created by <a href="https://nicolaberry.uk" target="_blank" rel="noopener" class="author-link">Nicola
+            Berry</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>  <div class="slider-ticks">
+              <span>100px</span>
+              <span>3840px (4K)</span>
+            </div>
+            <p class="control-help">Image aspect ratio is preserved automatically.</p>
+          </div>
+
+          <div class="action-footer">
+            <button type="button" id="btn-download-compressor" class="primary-btn download-trigger" disabled>
+              <i class="fa-solid fa-download"></i> Download Optimized WebP
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Colour Palette Controls -->
+        <div class="tab-control-group" data-content="palette">
+          <div class="control-group">
+            <div class="slider-label-row">
+              <label for="range-colors" class="control-label">Number of Colours</label>
+              <span class="slider-value" id="val-colors">5</span>
+            </div>
+            <input type="range" id="range-colors" min="2" max="10" value="5">
+            <div class="slider-ticks">
+              <span>2 Colours</span>
+              <span>10 Colours</span>
+            </div>
+            <p class="control-help">Extracts the most dominant swatches using median-cut quantization.</p>
+          </div>
+
+          <div class="control-group palette-action-btns">
+            <button type="button" id="btn-copy-css" class="secondary-btn" disabled>
+              <i class="fa-solid fa-code"></i> Copy CSS Variables
+            </button>
+            <button type="button" id="btn-copy-json" class="secondary-btn" disabled>
+              <i class="fa-solid fa-brackets-curly"></i> Copy JSON Palette
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. Icon Builder Controls -->
+        <div class="tab-control-group" data-content="icons">
+          <p class="section-description-text">Upload a high-resolution square image to build browser favicons, apple touch icons, and web manifest logo files instantly.</p>
+          
+          <div class="action-footer">
+            <button type="button" id="btn-download-icons" class="primary-btn download-trigger" disabled>
+              <i class="fa-solid fa-file-zipper"></i> Download All Icons (.zip)
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. Watermarker Controls -->
+        <div class="tab-control-group" data-content="watermark">
+          <div class="control-group">
+            <label class="control-label">Watermark Type</label>
+            <div class="radio-tab-row">
+              <label class="radio-label-btn active">
+                <input type="radio" name="watermark-type" value="text" checked> Text
+              </label>
+              <label class="radio-label-btn">
+                <input type="radio" name="watermark-type" value="logo"> Logo Image
+              </label>
+            </div>
+          </div>
+
+          <!-- Text Watermark Controls -->
+          <div class="control-group" id="watermark-text-inputs">
+            <label for="input-watermark-text" class="control-label">Watermark Text</label>
+            <input type="text" id="input-watermark-text" value="© Nicola Berry" placeholder="e.g. © Nicola Berry">
+            
+            <div class="slider-label-row" style="margin-top: 0.8rem;">
+              <label for="range-font-size" class="control-label">Font Size</label>
+              <span class="slider-value" id="val-font-size">32 px</span>
+            </div>
+            <input type="range" id="range-font-size" min="10" max="120" value="32">
+          </div>
+
+          <!-- Logo Watermark Controls -->
+          <div class="control-group hidden" id="watermark-logo-inputs">
+            <label class="control-label">Upload Watermark Logo</label>
+            <button type="button" id="btn-upload-logo" class="secondary-btn">
+              <i class="fa-solid fa-file-image"></i> Select Logo PNG
+            </button>
+            <input type="file" id="input-logo-file" accept="image/png" class="file-input-hidden">
+            <p class="control-help">Transparency is supported. PNG recommended.</p>
+          </div>
+
+          <!-- Shared Watermark Options -->
+          <div class="control-group">
+            <div class="slider-label-row">
+              <label for="range-watermark-opacity" class="control-label">Opacity</label>
+              <span class="slider-value" id="val-watermark-opacity">30%</span>
+            </div>
+            <input type="range" id="range-watermark-opacity" min="5" max="100" value="30">
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Watermark Position</label>
+            <div class="position-grid">
+              <button type="button" class="pos-btn" data-pos="top-left" title="Top Left"><i class="fa-solid fa-arrow-up-left"></i></button>
+              <button type="button" class="pos-btn" data-pos="top-right" title="Top Right"><i class="fa-solid fa-arrow-up-right"></i></button>
+              <button type="button" class="pos-btn" data-pos="center" title="Center"><i class="fa-solid fa-align-center"></i></button>
+              <button type="button" class="pos-btn" data-pos="bottom-left" title="Bottom Left"><i class="fa-solid fa-arrow-down-left"></i></button>
+              <button type="button" class="pos-btn active" data-pos="bottom-right" title="Bottom Right"><i class="fa-solid fa-arrow-down-right"></i></button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="slider-label-row">
+              <label for="range-watermark-margin" class="control-label">Offset Margin</label>
+              <span class="slider-value" id="val-watermark-margin">20 px</span>
+            </div>
+            <input type="range" id="range-watermark-margin" min="0" max="100" value="20">
+          </div>
+
+          <div class="action-footer">
+            <button type="button" id="btn-download-watermark" class="primary-btn download-trigger" disabled>
+              <i class="fa-solid fa-download"></i> Download Watermarked PNG
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preview Workspace (Right/Bottom) -->
+      <section class="preview-area" aria-label="Workspaces">
+        
+        <!-- Upload State (Dropzone) -->
+        <div class="upload-dropzone glass-card" id="dropzone">
+          <input type="file" id="input-file" accept="image/*" class="file-input-hidden">
+          <div class="dropzone-content">
+            <div class="dropzone-icon">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <h3>Drag & Drop Image Here</h3>
+            <p class="dropzone-sub">Supports PNG, JPEG, WEBP or Paste (Ctrl+V)</p>
+            <button type="button" class="btn-browse primary-btn">Browse Files</button>
+          </div>
+        </div>
+
+        <!-- Editor State (Hidden initially) -->
+        <div class="editor-workspace hidden" id="editor-workspace">
+          
+          <!-- 1. Background Remover Preview Wrapper -->
+          <div class="tab-preview-wrapper active" data-preview="remover">
+            <div class="preview-card glass-card">
+              <div class="card-header">
+                <span class="card-badge"><i class="fa-solid fa-image"></i> Original</span>
+                <span class="image-dimensions label-orig-dimensions">0 x 0</span>
+              </div>
+              <div class="canvas-container">
+                <canvas id="canvas-original"></canvas>
+              </div>
+            </div>
+
+            <div class="preview-card glass-card">
+              <div class="card-header">
+                <span class="card-badge success"><i class="fa-solid fa-circle-nodes"></i> Transparent Output</span>
+                <span class="zoom-indicator"><i class="fa-solid fa-expand"></i> Auto Fit</span>
+              </div>
+              <div class="canvas-container checkered-bg">
+                <canvas id="canvas-processed"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. WebP Compressor Preview Wrapper -->
+          <div class="tab-preview-wrapper" data-preview="compressor">
+            <div class="preview-card glass-card">
+              <div class="card-header">
+                <span class="card-badge"><i class="fa-solid fa-image"></i> Original</span>
+                <span class="image-dimensions label-orig-dimensions">0 x 0</span>
+              </div>
+              <div class="canvas-container">
+                <canvas id="canvas-compressor-original"></canvas>
+              </div>
+            </div>
+
+            <div class="preview-card glass-card">
+              <div class="card-header">
+                <span class="card-badge success"><i class="fa-solid fa-sparkles"></i> Compressed Output</span>
+                <span class="savings-metric" id="savings-metric">Calculating savings...</span>
+              </div>
+              <div class="canvas-container">
+                <canvas id="canvas-compressor-processed"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Colour Palette Preview Wrapper -->
+          <div class="tab-preview-wrapper" data-preview="palette">
+            <div class="preview-card glass-card" style="grid-column: span 2;">
+              <div class="card-header">
+                <span class="card-badge"><i class="fa-solid fa-swatchbook"></i> Colour Swatches</span>
+                <span class="zoom-indicator">Click any swatch to copy Hex code</span>
+              </div>
+              <div class="palette-workspace-inner">
+                <!-- Left: Swatch list -->
+                <div class="swatches-container" id="swatches-grid">
+                  <!-- Generated Dynamically -->
+                </div>
+                <!-- Right: Tiny Source Image Preview -->
+                <div class="palette-source-preview">
+                  <span class="preview-sub-label">Source Asset</span>
+                  <canvas id="canvas-palette-source"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Icon Builder Preview Wrapper -->
+          <div class="tab-preview-wrapper" data-preview="icons">
+            <!-- Left: Icons grid -->
+            <div class="preview-card glass-card" style="flex: 1.3;">
+              <div class="card-header">
+                <span class="card-badge"><i class="fa-solid fa-border-all"></i> Rendered Icon Suite</span>
+              </div>
+              <div class="icons-list-container" id="icons-grid-container">
+                <!-- Generated Dynamically -->
+              </div>
+            </div>
+            <!-- Right: Code Copy boilerplate -->
+            <div class="preview-card glass-card" style="flex: 1;">
+              <div class="card-header">
+                <span class="card-badge"><i class="fa-solid fa-code"></i> HTML Integration</span>
+                <button type="button" class="text-btn" id="btn-copy-html-tags"><i class="fa-solid fa-copy"></i> Copy</button>
+              </div>
+              <div class="code-output-container">
+                <textarea id="textarea-html-tags" readonly aria-label="Copyable HTML tags for index.html"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Watermarker Preview Wrapper -->
+          <div class="tab-preview-wrapper" data-preview="watermark">
+            <div class="preview-card glass-card" style="grid-column: span 2; width: 100%;">
+              <div class="card-header">
+                <span class="card-badge"><i class="fa-solid fa-image"></i> Watermark Preview</span>
+                <span class="image-dimensions label-orig-dimensions">0 x 0</span>
+              </div>
+              <div class="canvas-container">
+                <canvas id="canvas-watermark-processed"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <p class="copyright">© 2026 AuraRemover. All processing runs locally in your browser.</p>
+        <p class="attribution">
           Created by <a href="https://nicolaberry.uk" target="_blank" rel="noopener" class="author-link">Nicola Berry</a>
         </p>
       </div>
@@ -167,6 +442,8 @@
   <!-- Toast Notification Container -->
   <div id="toast-container" class="toast-container"></div>
 
+  <!-- JSZip is required for bundling favicons client-side -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMV7M3FwKV43sA/snv8UXgiBYyGyObYhJHNF72M5z7B38bZgPq17Ipy498305V8I2K9eD/N7fU3b4U1r71L6Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="app.js"></script>
 </body>
 </html>
