@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AuraRemover - Premium Image Background Eraser</title>
-  <meta name="description"
-    content="A premium, client-side web tool to remove dark, light, or specific color backgrounds from your images with real-time preview and edge smoothing. Created by Nicola Berry.">
-
+  <title>AuraRemover — Premium Image Asset Web Suite</title>
+  <meta name="description" content="A premium, client-side web tool to remove backgrounds, compress WebP, extract colour palettes, build icons, and watermark images. Created by Nicola Berry.">
+  
   <!-- Google Fonts for Luxury Editorial Styling -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- FontAwesome for Premium Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
   <div class="app-container">
@@ -32,7 +25,7 @@
         <span class="logo-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
         <div class="brand-text">
           <h1 id="app-title">AuraRemover</h1>
-          <span class="tagline">Elegant transparency keyer</span>
+          <span class="tagline">Elegant Asset Utility Suite</span>
         </div>
       </div>
       <div class="header-actions">
@@ -42,12 +35,32 @@
       </div>
     </header>
 
+    <!-- Tab Navigation Menu -->
+    <nav class="app-tabs" aria-label="Tool selection">
+      <button type="button" class="tab-btn active" data-tab="remover">
+        <i class="fa-solid fa-eraser"></i> Background Eraser
+      </button>
+      <button type="button" class="tab-btn" data-tab="compressor">
+        <i class="fa-solid fa-file-lines"></i> WebP Compressor
+      </button>
+      <button type="button" class="tab-btn" data-tab="palette">
+        <i class="fa-solid fa-palette"></i> Colour Palette
+      </button>
+      <button type="button" class="tab-btn" data-tab="icons">
+        <i class="fa-solid fa-circle-nodes"></i> Icon Builder
+      </button>
+      <button type="button" class="tab-btn" data-tab="watermark">
+        <i class="fa-solid fa-copyright"></i> Watermarker
+      </button>
+    </nav>
+
     <!-- Main Workspace -->
     <main class="workspace">
+      
       <!-- Controls Panel (Left/Top) -->
-      <section class="control-panel glass-card" aria-label="Controls">
-        <h2 class="panel-title"><i class="fa-solid fa-sliders"></i> Adjustments</h2>
-
+      <section class="control-panel glass-card" aria-label="Adjustments and options">
+        <h2 class="panel-title"><i class="fa-solid fa-sliders"></i> Customisation</h2>
+        
         <!-- Upload Trigger in Sidebar (Visible when image is loaded) -->
         <div class="sidebar-upload-btn" id="sidebar-upload-container">
           <button type="button" id="btn-change-image" class="secondary-btn">
@@ -55,131 +68,97 @@
           </button>
         </div>
 
-        <div class="control-group">
-          <label for="select-mode" class="control-label">Removal Mode</label>
-          <div class="select-wrapper">
-            <select id="select-mode">
-              <option value="dark" selected>Remove Dark Background</option>
-              <option value="light">Remove Light Background</option>
-              <option value="color">Remove Custom Color</option>
-            </select>
-            <i class="fa-solid fa-chevron-down select-icon"></i>
-          </div>
-          <p class="control-help" id="mode-help-text">Removes black and shadow areas under the specified brightness
-            threshold.</p>
-        </div>
-
-        <!-- Custom Color Picker (Hidden by default unless 'color' mode selected) -->
-        <div class="control-group hidden" id="color-picker-group">
-          <label class="control-label">Target Color</label>
-          <div class="color-picker-row">
-            <div class="color-preview-box" id="color-preview-box">
-              <input type="color" id="input-color-picker" value="#000000" aria-label="Select custom color to remove">
+        <!-- 1. Background Remover Controls -->
+        <div class="tab-control-group active" data-content="remover">
+          <div class="control-group">
+            <label for="select-mode" class="control-label">Removal Mode</label>
+            <div class="select-wrapper">
+              <select id="select-mode">
+                <option value="dark" selected>Remove Dark Background</option>
+                <option value="light">Remove Light Background</option>
+                <option value="color">Remove Custom Colour</option>
+              </select>
+              <i class="fa-solid fa-chevron-down select-icon"></i>
             </div>
-            <div class="color-inputs">
-              <input type="text" id="input-color-hex" value="#000000" placeholder="#000000" maxlength="7">
-              <button type="button" id="btn-eyedropper" class="icon-btn" title="Sample color from image">
-                <i class="fa-solid fa-eye-dropper"></i>
-              </button>
+            <p class="control-help" id="mode-help-text">Removes black and shadow areas under the specified brightness threshold.</p>
+          </div>
+
+          <!-- Custom Colour Picker -->
+          <div class="control-group hidden" id="color-picker-group">
+            <label class="control-label">Target Colour</label>
+            <div class="color-picker-row">
+              <div class="color-preview-box" id="color-preview-box">
+                <input type="color" id="input-color-picker" value="#000000" aria-label="Select custom colour to remove">
+              </div>
+              <div class="color-inputs">
+                <input type="text" id="input-color-hex" value="#000000" placeholder="#000000" maxlength="7">
+                <button type="button" id="btn-eyedropper" class="icon-btn" title="Sample colour from image">
+                  <i class="fa-solid fa-eye-dropper"></i>
+                </button>
+              </div>
             </div>
+            <p class="control-help">Select the exact colour to turn transparent. Click the dropper to sample from the original canvas.</p>
           </div>
-          <p class="control-help">Select the exact color to turn transparent.</p>
-        </div>
 
-        <div class="control-group">
-          <div class="slider-label-row">
-            <label for="range-threshold" class="control-label">Threshold</label>
-            <span class="slider-value" id="val-threshold">30</span>
-          </div>
-          <input type="range" id="range-threshold" min="0" max="255" value="30">
-          <div class="slider-ticks">
-            <span>0 (Low)</span>
-            <span>255 (High)</span>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <div class="slider-label-row">
-            <label for="range-fuzziness" class="control-label">Edge Smoothness</label>
-            <span class="slider-value" id="val-fuzziness">10</span>
-          </div>
-          <input type="range" id="range-fuzziness" min="0" max="100" value="10">
-          <div class="slider-ticks">
-            <span>Sharp</span>
-            <span>Feathered</span>
-          </div>
-        </div>
-
-        <div class="action-footer">
-          <button type="button" id="btn-download" class="primary-btn" disabled>
-            <i class="fa-solid fa-download"></i> Download Transparent PNG
-          </button>
-        </div>
-      </section>
-
-      <!-- Preview Workspace (Right/Bottom) -->
-      <section class="preview-area" aria-label="Image Previews">
-
-        <!-- Upload State (Dropzone) -->
-        <div class="upload-dropzone glass-card" id="dropzone">
-          <input type="file" id="input-file" accept="image/*" class="file-input-hidden">
-          <div class="dropzone-content">
-            <div class="dropzone-icon">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
+          <div class="control-group">
+            <div class="slider-label-row">
+              <label for="range-threshold" class="control-label">Threshold</label>
+              <span class="slider-value" id="val-threshold">30</span>
             </div>
-            <h3>Drag & Drop Image Here</h3>
-            <p class="dropzone-sub">Supports PNG, JPEG, WEBP or Paste (Ctrl+V)</p>
-            <button type="button" class="btn-browse primary-btn">Browse Files</button>
-          </div>
-        </div>
-
-        <!-- Editor State (Hidden initially) -->
-        <div class="editor-workspace hidden" id="editor-workspace">
-          <!-- Before Card -->
-          <div class="preview-card glass-card">
-            <div class="card-header">
-              <span class="card-badge"><i class="fa-solid fa-image"></i> Original</span>
-              <span class="image-dimensions" id="orig-dimensions">0 x 0</span>
-            </div>
-            <div class="canvas-container">
-              <canvas id="canvas-original"></canvas>
+            <input type="range" id="range-threshold" min="0" max="255" value="30">
+            <div class="slider-ticks">
+              <span>0 (Low)</span>
+              <span>255 (High)</span>
             </div>
           </div>
 
-          <!-- After Card -->
-          <div class="preview-card glass-card">
-            <div class="card-header">
-              <span class="card-badge success"><i class="fa-solid fa-circle-nodes"></i> Transparent Output</span>
-              <span class="zoom-indicator" id="output-zoom"><i class="fa-solid fa-expand"></i> Auto Fit</span>
+          <div class="control-group">
+            <div class="slider-label-row">
+              <label for="range-fuzziness" class="control-label">Edge Smoothness</label>
+              <span class="slider-value" id="val-fuzziness">10</span>
             </div>
-            <div class="canvas-container checkered-bg">
-              <canvas id="canvas-processed"></canvas>
+            <input type="range" id="range-fuzziness" min="0" max="100" value="10">
+            <div class="slider-ticks">
+              <span>Sharp</span>
+              <span>Feathered</span>
             </div>
+          </div>
+
+          <div class="action-footer">
+            <button type="button" id="btn-download-remover" class="primary-btn download-trigger" disabled>
+              <i class="fa-solid fa-download"></i> Download Transparent PNG
+            </button>
           </div>
         </div>
 
-      </section>
-    </main>
+        <!-- 2. WebP Compressor Controls -->
+        <div class="tab-control-group" data-content="compressor">
+          <div class="control-group">
+            <div class="slider-label-row">
+              <label for="range-quality" class="control-label">Compression Quality</label>
+              <span class="slider-value" id="val-quality">80</span>
+            </div>
+            <input type="range" id="range-quality" min="1" max="100" value="80">
+            <div class="slider-ticks">
+              <span>Max Compression</span>
+              <span>Lossless (100)</span>
+            </div>
+            <p class="control-help">Lower values decrease quality but result in smaller file sizes.</p>
+          </div>
 
-    <!-- Footer -->
-    <footer class="app-footer">
-      <div class="footer-content">
-        <p class="copyright">© 2026 AuraRemover. All processing runs locally in your browser.</p>
-        <p class="attribution">
-          Created by <a href="https://nicolaberry.uk" target="_blank" rel="noopener" class="author-link">Nicola
-            Berry</a>
-        </p>
-      </div>
-    </footer>
-  </div>
+          <div class="control-group">
+            <label class="control-checkbox-label">
+              <input type="checkbox" id="check-resize"> Enable Image Resizing
+            </label>
+          </div>
 
-  <!-- Toast Notification Container -->
-  <div id="toast-container" class="toast-container"></div>
-
-  <script src="app.js"></script>
-</body>
-
-</html>  <div class="slider-ticks">
+          <div class="control-group hidden" id="resize-inputs-group">
+            <div class="slider-label-row">
+              <label for="range-width" class="control-label">Maximum Width</label>
+              <span class="slider-value" id="val-width">1200 px</span>
+            </div>
+            <input type="range" id="range-width" min="100" max="3840" value="1200">
+            <div class="slider-ticks">
               <span>100px</span>
               <span>3840px (4K)</span>
             </div>
@@ -357,7 +336,7 @@
 
             <div class="preview-card glass-card">
               <div class="card-header">
-                <span class="card-badge success"><i class="fa-solid fa-sparkles"></i> Compressed Output</span>
+                <span class="card-badge success"><i class="fa-solid fa-circle-nodes"></i> Compressed Output</span>
                 <span class="savings-metric" id="savings-metric">Calculating savings...</span>
               </div>
               <div class="canvas-container">
